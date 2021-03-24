@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { datesSchema } = require('dates.js');
+const { datesSchema } = require('./dates.js');
 
 const usersSchema = new mongoose.Schema({
     name: {

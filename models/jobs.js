@@ -54,7 +54,7 @@ const jobsSchema = new mongoose.Schema({
         },
     },
     recievedReply: {
-        type: Bool,
+        type: Boolean,
         default: false,
     },
     dateOfLastContact: {

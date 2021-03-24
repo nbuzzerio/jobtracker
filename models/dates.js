@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const { jobSchema } = require('jobs.js')
+const { jobsSchema } = require('./jobs.js')
 
 const datesSchema = new mongoose.Schema({
     date: {
@@ -10,7 +10,7 @@ const datesSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    jobs: [jobSchema]
+    jobs: [ jobsSchema ]
 });
 
 function validateDates(dates) {
