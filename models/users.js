@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { datesSchema } = require('./dates.js');
+const { jobsSchema } = require('./jobs.js');
 
 const usersSchema = new mongoose.Schema({
     name: {
@@ -26,7 +26,7 @@ const usersSchema = new mongoose.Schema({
     },
     dates: {
         type: Map,
-        of: datesSchema
+        of: jobsSchema
     }
 
 });
