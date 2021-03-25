@@ -26,9 +26,8 @@ const usersSchema = new mongoose.Schema({
     },
     dates: {
         type: Map,
-        of: jobsSchema
+        of: []
     }
-
 });
 
 usersSchema.methods.generateAuthToken = function () {
