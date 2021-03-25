@@ -16,10 +16,13 @@ router.post('/', auth, async (req, res) => {
 
   const jobs = user.dates.get(req.body.date);
   if (jobs) {
-      jobs.push(req.body.job);
-      user.dates.set(req.body.date, jobs);
-      await user.save();
-      return res.send('Job was successfully saved.');
+      if (!jobs.find(job => job.company === req.body.job.company && job.role === req.body.job.role)) {
+          jobs.push(req.body.job);
+          user.dates.set(req.body.date, jobs);
+          await user.save();
+          return res.send('Job was successfully saved.');
+      }
+      return res.status(400).send('This job has already been entered into the log.');
   }
 
   user.dates.set(req.body.date, [req.body.job]);
