@@ -7,6 +7,13 @@ const { User } = require('../models/users');
 const { validateJobs } = require('../models/jobs');
 const _ = require('lodash');
 
+
+
+router.get('/', auth, async (req, res) => {
+    const user = await User.findById(req.user._id).select('_id name email dates');
+    res.send(user.dates);
+});
+
 router.post('/', auth, async (req, res) => {
 
   const user = await User.findById(req.user._id).select('_id name email dates');
