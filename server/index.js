@@ -4,11 +4,13 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const user = require('../routes/user');
+const auth = require('../routes/auth');
 
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}).then(() => console.log('Connected to MongoDB...'));
 
 app.use(express.json());
 app.use('/api/users', user);
+app.use('/api/auth', auth);
 
 app.use(express.static(path.join(__dirname + '/../client/dist')));
 
