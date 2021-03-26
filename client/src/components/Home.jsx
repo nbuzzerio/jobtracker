@@ -37,7 +37,7 @@ function Home() {
     const signedIn = (
         <React.Fragment>
             <button id="signin" onClick={signOut}>Sign Out</button>
-            <Jobs userDate={userData}/>
+            <Jobs userData={userData}/>
         </React.Fragment>
     )
 
