@@ -9,7 +9,7 @@ function Home() {
 
     const [loggedIn, setLoggedIn] = useState(token);
     const [signInPage, setSignInPage] = useState(false);
-    const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
     
     useEffect( () => {
         let mounted = true;
@@ -18,7 +18,7 @@ function Home() {
             .then(userInfo => {
                 if (mounted) {
                     localStorage.setItem("token", loggedIn);
-                    setUser(userInfo);
+                    setUserData(userInfo);
                 }
             })
             .catch(function (error) {
@@ -37,7 +37,7 @@ function Home() {
     const signedIn = (
         <React.Fragment>
             <button id="signin" onClick={signOut}>Sign Out</button>
-            <Jobs />
+            <Jobs userDate={userData}/>
         </React.Fragment>
     )
 

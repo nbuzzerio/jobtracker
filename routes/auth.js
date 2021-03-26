@@ -18,7 +18,19 @@ router.post('/', async (req, res) => {
   if (!validPassword) return res.status(400).send("Invalid email or password.");
 
   const token = user.generateAuthToken();
-  res.header("x-auth-token", token).send(_.pick(user, ["_id", "name", "email"]));
+  
+  const userData = _.pick(user, ["_id", "name", "email"]);
+
+  userData.dates = {};
+  const mapKeys = user.dates.keys();
+  if (mapKeys) {
+    let current = mapKeys.next().value;
+    while(current) {
+      current = mapKeys.next().value;
+      userData.dates[current] = user.dates.get(current);
+    }
+  }
+  res.header("x-auth-token", token).send(userData);
 });
 
 function validate(req) {

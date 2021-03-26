@@ -7,8 +7,18 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 
 router.get('/me', auth, async (req, res) => {
-    const user = await User.findById(req.user._id).select('_id name email');
-    res.send(user);
+    const user = await User.findById(req.user._id).select('_id name email dates');
+    const userData = _.pick(user, ["_id", "name", "email"]);
+    userData.dates = {};
+    const mapKeys = user.dates.keys();
+    if (mapKeys) {
+      let current = mapKeys.next().value;
+      while(current) {
+        current = mapKeys.next().value;
+        userData.dates[current] = user.dates.get(current);
+      }
+    }
+    res.send(userData);
 });
 
 router.post("/", async (req, res) => {
