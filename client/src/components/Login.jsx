@@ -17,7 +17,12 @@ export default function Login(props) {
         let mounted = true;
         if(password === passwordConfirm && password !== '') {
             postNewUser(name, email, password)
-                .then( () => { if (mounted) props.setSignInPage(false) } )
+                .then( (res) => { 
+                    if (mounted) {
+                        props.setLoggedIn(res.headers.x-auth-token); 
+                        props.setSignInPage(false); 
+                    }
+                })
                 .catch(err => {
                     setUserError(err.response.data);
                 })
@@ -32,7 +37,12 @@ export default function Login(props) {
         
         let mounted = true;
         postExistingUser(email, password)
-                .then( () => { if (mounted) props.setSignInPage(false) } )
+                .then( (res) => { 
+                    if (mounted) {
+                        props.setSignInPage(false)
+                        props.setLoggedIn(res.headers['x-auth-token']);  
+                    }  
+                })
                 .catch(err => {
                     setUserError(err.response.data);
                 })
