@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Home from './components/Home.jsx'
 
 ReactDOM.render(
-    <div>--------------------------------------
-        <h1>Job Tracker...</h1>
-         --------------------------------------
-    </div>,
+    <Home />,
     document.getElementById('app')
 );
