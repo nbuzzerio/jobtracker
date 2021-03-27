@@ -70,8 +70,8 @@ function validateJobs(jobs) {
         job: Joi.object({
             company: Joi.string().min(5).max(100).required(),
             role: Joi.string().min(5).max(100).required(),
-            jobLink: Joi.string().min(5).max(1000).required(),
-            jobBoard: Joi.string().min(5).max(1000).required(),
+            link: Joi.string().min(5).max(1000).required(),
+            board: Joi.string().min(5).max(1000).required(),
             contact: Joi.object({
                 name: Joi.string().min(5).max(100).optional(),
                 email: Joi.string().min(5).max(100).optional(),

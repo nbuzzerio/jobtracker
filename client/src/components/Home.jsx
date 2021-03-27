@@ -10,6 +10,10 @@ function Home() {
     const [loggedIn, setLoggedIn] = useState(token);
     const [signInPage, setSignInPage] = useState(false);
     const [userData, setUserData] = useState(null);
+
+    useEffect( () => {
+
+    }, [userData])
     
     useEffect( () => {
         let mounted = true;
@@ -37,7 +41,7 @@ function Home() {
     const signedIn = (
         <React.Fragment>
             <button id="signin" onClick={signOut}>Sign Out</button>
-            <Jobs userData={userData}/>
+            <Jobs userData={userData} setUserData={setUserData}/>
         </React.Fragment>
     )
 

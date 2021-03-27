@@ -9,7 +9,7 @@ export default function Login(props) {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
-    const [newUserError, setUserError] = useState(true);
+    const [newUserError, setUserError] = useState(false);
     
     const handleNewUserSubmit = (e) => {
         e.preventDefault();

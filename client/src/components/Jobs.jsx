@@ -1,9 +1,11 @@
 import React, { useState, useEffect} from 'react';
+import ApplicationForm from './ApplicatoinForm.jsx';
 
 const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(52, 5px)',
     gridTemplateRows: 'repeat(7, auto)',
+    justifyContent: 'center',
     gridGap: '5px 5px',
     padding: '0',
     margin: '5vh 36vw'
@@ -104,8 +106,12 @@ export default function Jobs(props) {
     }
 
     return (
+        <React.Fragment>
+        <ApplicationForm setUserData={props.setUserData} />
         <div id="year" style={styles}>
             {days}
         </div>
+        </React.Fragment>
+
     )
 }
