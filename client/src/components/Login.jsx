@@ -19,8 +19,8 @@ export default function Login(props) {
             postNewUser(name, email, password)
                 .then( (res) => { 
                     if (mounted) {
-                        props.setLoggedIn(res.headers.x-auth-token); 
                         props.setSignInPage(false); 
+                        props.setLoggedIn(res.headers['x-auth-token']); 
                     }
                 })
                 .catch(err => {

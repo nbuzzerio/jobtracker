@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d source-map --watch",
-    "react-prod": "webpack -p",
+    "react-prod": "webpack --config webpack.prod.js && node s3_upload.js",
+    "upload-bundle": "node s3_upload.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/nbuzzerio/jobtracker#readme",
   "dependencies": {
+    "aws-sdk": "^2.874.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",

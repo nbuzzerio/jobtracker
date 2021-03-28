@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const pathName = window.location.pathname;
+
 export default async (job, token) => {
     return await axios({
       method: 'post',
-      url: '/api/jobs',
+      url: `${window.location.pathname}api/jobs`,
       data: {
         job
       },
