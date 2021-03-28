@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import postApplication from './_postApplication';
+import updateApplication from './_updateApplication';
 
 export default function ApplicationForm(props) {
     const token = localStorage.getItem("token");
@@ -53,9 +54,11 @@ export default function ApplicationForm(props) {
         job.link = link;
         job.board = board;
         job.contact = contact;
-
+        
         let mounted = true;
-        postApplication(job, token)
+
+        if (props.onClose) {
+            updateApplication(job, props.date, props.index, token)
             .then( (userInfo) => { 
                 if (mounted) {
                     setCompany('');
@@ -72,15 +75,38 @@ export default function ApplicationForm(props) {
                     setApplicationError(false);
                     props.setUserData(userInfo);
                 }   
-                if (props.onClose) {
                     props.onClose()
                     props.setUserDataChange(true)
-                };
             })
             .catch(err => {
                 console.log(err)
                 setApplicationError(err.response.data);
             })
+        } else {
+            postApplication(job, token)
+                .then( (userInfo) => { 
+                    if (mounted) {
+                        setCompany('');
+                        setRole('');
+                        setLink('');
+                        setBoard('');
+                        setContact({
+                            name: '',
+                            email: '',
+                            role: '',
+                            notes: '',
+                            linkedInProfile: ''
+                        });
+                        setApplicationError(false);
+                        props.setUserData(userInfo);
+                    }   
+                })
+                .catch(err => {
+                    console.log(err)
+                    setApplicationError(err.response.data);
+                })
+        }
+
     }
 
     let applicationWarning;

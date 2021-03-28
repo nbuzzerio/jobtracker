@@ -2,13 +2,14 @@ import axios from 'axios';
 
 const pathName = window.location.pathname;
 
-export default async (job, date, token) => {
+export default async (job, date, index, token) => {
     return await axios({
-      method: 'delete',
+      method: 'put',
       url: `${window.location.pathname}api/jobs`,
       data: {
         job,
-        date
+        date,
+        index
       },
       headers: {
         'x-auth-token': token

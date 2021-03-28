@@ -67,6 +67,7 @@ const styleSq5 = {
 export default function Jobs(props) {
 
     const [selectedJobs, setSelectedJobs] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
     const [userDataChange, setUserDataChange] = useState(false)
 
     useEffect(() => {
@@ -118,7 +119,7 @@ export default function Jobs(props) {
             } else if (applications >= 5) {
                 style = styleSq5;
             }
-            return <div className='dateSqaure' key={index} style={style} onClick={() => {listApplications(dates[date])}}></div>
+            return <div className='dateSqaure' key={index} style={style} onClick={() => {listApplications(dates[date], date)}}></div>
         });
         const firstDayOfYear = new Date(`1/1/${thisYear}`).getDay();
         if (firstDayOfYear > 0) {
@@ -130,8 +131,9 @@ export default function Jobs(props) {
         days = <div>No Job Data Available</div>
     }
 
-    const listApplications = (applications) => {
+    const listApplications = (applications, date) => {
         setSelectedJobs(applications);
+        setSelectedDate(date)
     }
 
     return (
@@ -140,7 +142,7 @@ export default function Jobs(props) {
             <div id="year" style={styles}>
                 {days}
             </div>
-            <JobsList selectedJobs={selectedJobs} setUserData={props.setUserData} setUserDataChange={setUserDataChange}/>
+            <JobsList selectedJobs={selectedJobs} setUserData={props.setUserData} setUserDataChange={setUserDataChange} date={selectedDate}/>
         </div>
 
     )

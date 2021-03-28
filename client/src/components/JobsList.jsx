@@ -12,9 +12,14 @@ const style = {
     boxShadow: '0 0 20px 10px #black',
 }
 
-export default function Jobs(props) {
+export default function JobsList(props) {
 
     const [selectedJob, setSelectedJob] = useState(false);
+    const [index, setIndex] = useState(-1);
+
+    useEffect(() => {
+        setIndex(props.selectedJobs.indexOf(selectedJob))
+    }, [selectedJob])
 
     const jobs = props.selectedJobs.map((app, index) => {
         return (
@@ -28,7 +33,7 @@ export default function Jobs(props) {
     return (
         <div id="jobAppList" style={{display: 'flex', justifyContent: 'center', width: '100vw'}}>
             {jobs}
-            <JobModal selectedJob={selectedJob} setUserData={props.setUserData} setUserDataChange={props.setUserDataChange} onClose={() => setSelectedJob(false)} />
+            <JobModal selectedJob={selectedJob} setUserData={props.setUserData} setUserDataChange={props.setUserDataChange} onClose={() => setSelectedJob(false)} date={props.date} index={index}/>
         </div>
     )
 }

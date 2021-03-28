@@ -23,7 +23,7 @@ const overlayStyles = {
     zIndex: '1000'
 }
 
-export default function JobModal({selectedJob, setUserData, setUserDataChange, onClose}) {
+export default function JobModal({selectedJob, date, index, setUserData, setUserDataChange, onClose}) {
     const token = localStorage.getItem("token");
 
     if (!selectedJob) return null;
@@ -32,14 +32,14 @@ export default function JobModal({selectedJob, setUserData, setUserDataChange, o
 
     let job;
     if (edit) {
-        job = <ApplicationForm selectedJob={selectedJob} setUserData={setUserData} setUserDataChange={setUserDataChange} onClose={onClose}/>
+        job = <ApplicationForm selectedJob={selectedJob} date={date} index={index} setUserData={setUserData} setUserDataChange={setUserDataChange} onClose={onClose}/>
     } else {
         job = <ApplicationReadOnly selectedJob={selectedJob} onClose={onClose}/>
     }
 
     const handleDelete = (e) => {
         e.preventDefault();
-        deleteApplication(selectedJob, token)
+        deleteApplication(selectedJob, date, token)
             .then( (userData) => {
                 setUserData(userData);
                 setUserDataChange(true);

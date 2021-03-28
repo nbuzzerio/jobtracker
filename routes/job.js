@@ -47,11 +47,33 @@ router.post('/', auth, async (req, res) => {
   res.send(user);
 });
 
+router.put('/', auth, async (req, res) => {
+    const user = await User.findById(req.user._id).select('_id name email dates');
+    
+    const index = req.body.index;
+    delete req.body.index;
+
+    const { error: jobError } = validateJobs(req.body);
+    if (jobError) return res.status(400).send(jobError.details[0].message);
+  
+    let jobs = user.dates.get(req.body.date);
+    if (jobs) {
+        if ( index >= 0 ) {
+            jobs[index] = req.body.job;
+            user.dates.set(req.body.date, jobs);
+            user.markModified('dates');
+            await user.save()
+
+            return res.send(user);
+        }
+        return res.status(400).send('This job does not exist.');
+    }
+    return res.status(400).send('There are no jobs entered on this date.');
+});
+
 router.delete('/', auth, async (req, res) => {
 
     const user = await User.findById(req.user._id).select('_id name email dates');
-  
-    req.body.date = deriveDate();
   
     const { error: jobError } = validateJobs(req.body);
     if (jobError) return res.status(400).send(jobError.details[0].message);
@@ -67,6 +89,6 @@ router.delete('/', auth, async (req, res) => {
         return res.status(400).send('This job does not exist.');
     }
     return res.status(400).send('There are no jobs entered on this date.');
-  });
+});
 
 module.exports = router;
