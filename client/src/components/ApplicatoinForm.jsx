@@ -71,7 +71,7 @@ export default function Login(props) {
     }
 
     return (
-        <form id="application" onSubmit={handleApplicationSubmit} style={{display: 'flex', flexDirection: 'column', margin: '0 35%'}}>
+        <form id="application" onSubmit={handleApplicationSubmit} style={{display: 'flex', flexDirection: 'column', width: '400px'}}>
             <h2 style={{textAlign: 'center'}}>Job Application</h2>
             <label>
             Company:

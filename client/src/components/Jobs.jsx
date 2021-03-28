@@ -5,10 +5,13 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(52, 5px)',
     gridTemplateRows: 'repeat(7, auto)',
+    gridAutoFlow: 'column',
     justifyContent: 'center',
     gridGap: '5px 5px',
     padding: '0',
-    margin: '5vh 36vw'
+    margin: '5vh 0',
+    width: '520px',
+    backgroundColor: 'rgba(255, 255, 255, .5)',
 }
 
 const styleSq0 = {
@@ -106,12 +109,12 @@ export default function Jobs(props) {
     }
 
     return (
-        <React.Fragment>
-        <ApplicationForm setUserData={props.setUserData} />
-        <div id="year" style={styles}>
-            {days}
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <ApplicationForm setUserData={props.setUserData} />
+            <div id="year" style={styles}>
+                {days}
+            </div>
         </div>
-        </React.Fragment>
 
     )
 }

@@ -3,6 +3,12 @@ import Login from './Login.jsx';
 import Jobs from './Jobs.jsx';
 import getUserInfo from './_getUserInfo';
 
+const btnStyle = {
+    position: 'absolute',
+    top: '2vh',
+    left: '93vw'
+}
+
 function Home() {
 
     const token = localStorage.getItem("token");
@@ -40,13 +46,13 @@ function Home() {
 
     const signedIn = (
         <React.Fragment>
-            <button id="signin" onClick={signOut}>Sign Out</button>
+            <button id="signin" onClick={signOut} style={btnStyle}>Sign Out</button>
             <Jobs userData={userData} setUserData={setUserData}/>
         </React.Fragment>
     )
 
     const signedOut = (
-        <button id="signin" onClick={() => {setSignInPage(true)}}>Sign In</button>
+        <button id="signin" onClick={() => {setSignInPage(true)}} style={btnStyle}>Sign In</button>
     )
 
     let display;
@@ -62,11 +68,7 @@ function Home() {
 
     return (
         <React.Fragment>
-            <h1 style={{textAlign: 'center'}}>
-                -----------------------------
-                Job Tracker
-                -----------------------------
-            </h1>
+            <h1 style={{textAlign: 'center', textDecoration: 'underline'}}>Job Tracker</h1>
             {display}
         </React.Fragment>
     );

@@ -26,8 +26,8 @@ router.post('/', async (req, res) => {
   if (mapKeys) {
     let current = mapKeys.next().value;
     while(current) {
-      current = mapKeys.next().value;
       userData.dates[current] = user.dates.get(current);
+      current = mapKeys.next().value;
     }
   }
   res.header("x-auth-token", token).send(userData);
