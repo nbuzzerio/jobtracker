@@ -6,7 +6,10 @@ const style = {
     border: 'solid 1px black',
     borderRadius: '30px',
     margin: '1vw',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    textAlign: 'center',
+    backgroundColor: '#fff',
+    boxShadow: '0 0 20px 10px #black',
 }
 
 export default function Jobs(props) {

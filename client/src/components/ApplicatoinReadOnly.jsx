@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import postApplication from './_postApplication';
 
 export default function ApplicationForm(props) {
+
     const token = localStorage.getItem("token");
 
     const [company, setCompany] = useState('');
@@ -16,6 +17,7 @@ export default function ApplicationForm(props) {
         linkedInProfile: ''
     });
     const [applicationError, setApplicationError] = useState(false);
+
 
     useState(() => {
         if (props.selectedJob) {
@@ -33,16 +35,6 @@ export default function ApplicationForm(props) {
             });
         }
     }, [])
-
-    const handleCompanyChange = e => setCompany(e.target.value);
-    const handleRoleChange = e => setRole(e.target.value);
-    const handleLinkChange = e => setLink(e.target.value);
-    const handleBoardChange = e => setBoard(e.target.value);
-    const handleContactChange = e => {
-        let newContact = {...contact}
-        newContact[e.target.name] = e.target.value
-        setContact(newContact);
-    }
 
     const handleApplicationSubmit = (e) => {
         e.preventDefault();
@@ -89,46 +81,45 @@ export default function ApplicationForm(props) {
 
     return (
         <form id="application" onSubmit={handleApplicationSubmit} style={{display: 'flex', flexDirection: 'column', width: '400px'}}>
-            <h2 style={{textAlign: 'center'}}>Job Application</h2>
+            <h2 style={{textAlign: 'center', textTransform: 'capitalize'}}>{props.selectedJob.role} Application</h2>
+            <h2 style={{textAlign: 'center', textTransform: 'capitalize', marginTop: '0'}}> For {props.selectedJob.company}</h2>
             <label>
             Company:
             </label>
-            <input type="text" value={company} onChange={handleCompanyChange}></input>
+            <input type="text" value={company} style={{pointerEvents: 'none'}}></input>
             <label>
             Job Role:
             </label>
-            <input type="text" value={role} onChange={handleRoleChange}></input>
+            <input type="text" value={role} style={{pointerEvents: 'none'}}></input>
             <label>
             Job Link:
             </label>
-            <input type="text" value={link} onChange={handleLinkChange}></input>
+            <input type="text" value={link} style={{pointerEvents: 'none'}}></input>
             <label>
             Job Board:
             </label>
-            <input type="text" value={board} onChange={handleBoardChange}></input>
+            <input type="text" value={board} style={{pointerEvents: 'none'}}></input>
             <h3>Job Contact</h3>
             <label>
             Contact Name:
             </label>
-            <input type="text" value={contact.name} name='name' onChange={handleContactChange}></input>
+            <input type="text" value={contact.name} name='name' style={{pointerEvents: 'none'}}></input>
             <label>
             Contact Email:
             </label>
-            <input type="text" value={contact.email} name='email' onChange={handleContactChange}></input>
+            <input type="text" value={contact.email} name='email' style={{pointerEvents: 'none'}}></input>
             <label>
             Contact Role:
             </label>
-            <input type="text" value={contact.role} name='role' onChange={handleContactChange}></input>
+            <input type="text" value={contact.role} name='role' style={{pointerEvents: 'none'}}></input>
             <label>
             Notes:
             </label>
-            <input type="text" value={contact.notes} name='notes' onChange={handleContactChange}></input>
+            <input type="text" value={contact.notes} name='notes' style={{pointerEvents: 'none'}}></input>
             <label>
             Contact linkedInProfile:
             </label>
-            <input type="text" value={contact.linkedInProfile} name='linkedInProfile' onChange={handleContactChange}></input>
-            <input type="submit" value="Submit"></input>
-            {applicationWarning}
+            <input type="text" value={contact.linkedInProfile} name='linkedInProfile' style={{pointerEvents: 'none'}}></input>
         </form>
     )
 }
