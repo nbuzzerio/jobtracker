@@ -55,7 +55,6 @@ export default function ApplicationForm(props) {
         job.contact = contact;
 
         let mounted = true;
-
         postApplication(job, token)
             .then( (userInfo) => { 
                 if (mounted) {
@@ -73,8 +72,13 @@ export default function ApplicationForm(props) {
                     setApplicationError(false);
                     props.setUserData(userInfo);
                 }   
+                if (props.onClose) {
+                    props.onClose()
+                    props.setUserDataChange(true)
+                };
             })
             .catch(err => {
+                console.log(err)
                 setApplicationError(err.response.data);
             })
     }

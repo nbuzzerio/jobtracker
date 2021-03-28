@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import ApplicationForm from './ApplicatoinForm.jsx';
 import ApplicationReadOnly from './ApplicatoinReadOnly.jsx';
+import deleteApplication from './_deleteApplication';
 
 const modalStyles = {
     position: 'fixed',
@@ -22,7 +23,8 @@ const overlayStyles = {
     zIndex: '1000'
 }
 
-export default function JobModal({selectedJob, onClose}) {
+export default function JobModal({selectedJob, setUserData, setUserDataChange, onClose}) {
+    const token = localStorage.getItem("token");
 
     if (!selectedJob) return null;
     
@@ -30,9 +32,22 @@ export default function JobModal({selectedJob, onClose}) {
 
     let job;
     if (edit) {
-        job = <ApplicationForm selectedJob={selectedJob}/>
+        job = <ApplicationForm selectedJob={selectedJob} setUserData={setUserData} setUserDataChange={setUserDataChange} onClose={onClose}/>
     } else {
-        job = <ApplicationReadOnly selectedJob={selectedJob}/>
+        job = <ApplicationReadOnly selectedJob={selectedJob} onClose={onClose}/>
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        deleteApplication(selectedJob, token)
+            .then( (userData) => {
+                setUserData(userData);
+                setUserDataChange(true);
+                onClose()
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     
     return ReactDOM.createPortal(
@@ -42,7 +57,7 @@ export default function JobModal({selectedJob, onClose}) {
                 {job}
                 <div className="btnRow" style={{display: 'flex', justifyContent: 'space-between', padding: '20px'}}>
                     <button onClick={() => {setEdit(true)}}>Edit Job</button>
-                    <button>Delete Job</button>
+                    <button onClick={handleDelete}>Delete Job</button>
                 </div>
             </div>
         </div>,

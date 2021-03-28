@@ -86,40 +86,40 @@ export default function ApplicationForm(props) {
             <label>
             Company:
             </label>
-            <input type="text" value={company} style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={company} style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Job Role:
             </label>
-            <input type="text" value={role} style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={role} style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Job Link:
             </label>
-            <input type="text" value={link} style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={link} style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Job Board:
             </label>
-            <input type="text" value={board} style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={board} style={{pointerEvents: 'none'}} readOnly></input>
             <h3>Job Contact</h3>
             <label>
             Contact Name:
             </label>
-            <input type="text" value={contact.name} name='name' style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={contact.name} name='name' style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Contact Email:
             </label>
-            <input type="text" value={contact.email} name='email' style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={contact.email} name='email' style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Contact Role:
             </label>
-            <input type="text" value={contact.role} name='role' style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={contact.role} name='role' style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Notes:
             </label>
-            <input type="text" value={contact.notes} name='notes' style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={contact.notes} name='notes' style={{pointerEvents: 'none'}} readOnly></input>
             <label>
             Contact linkedInProfile:
             </label>
-            <input type="text" value={contact.linkedInProfile} name='linkedInProfile' style={{pointerEvents: 'none'}}></input>
+            <input type="text" value={contact.linkedInProfile} name='linkedInProfile' style={{pointerEvents: 'none'}} readOnly></input>
         </form>
     )
 }

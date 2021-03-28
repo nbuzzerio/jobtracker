@@ -20,7 +20,8 @@ const styleSq0 = {
     borderSizing: 'border-box',
     width: '5px',
     height: '5px',
-    backgroundColor: 'rgba(128, 128, 128, .8)'
+    backgroundColor: 'rgba(128, 128, 128, .8)',
+    pointerEvents: 'none'
 }
 const styleSq1 = {
     border: 'solid 1px black',
@@ -66,6 +67,12 @@ const styleSq5 = {
 export default function Jobs(props) {
 
     const [selectedJobs, setSelectedJobs] = useState([]);
+    const [userDataChange, setUserDataChange] = useState(false)
+
+    useEffect(() => {
+        setSelectedJobs([]);
+        setUserDataChange(false);
+    }, [userDataChange])
 
     let dates;
     if (props.userData) { dates = props.userData.dates }
@@ -133,7 +140,7 @@ export default function Jobs(props) {
             <div id="year" style={styles}>
                 {days}
             </div>
-            <JobsList selectedJobs={selectedJobs} />
+            <JobsList selectedJobs={selectedJobs} setUserData={props.setUserData} setUserDataChange={setUserDataChange}/>
         </div>
 
     )

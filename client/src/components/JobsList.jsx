@@ -28,9 +28,7 @@ export default function Jobs(props) {
     return (
         <div id="jobAppList" style={{display: 'flex', justifyContent: 'center', width: '100vw'}}>
             {jobs}
-            <JobModal selectedJob={selectedJob} onClose={() => setSelectedJob(false)}>
-                content goes here thankyou
-            </JobModal>
+            <JobModal selectedJob={selectedJob} setUserData={props.setUserData} setUserDataChange={props.setUserDataChange} onClose={() => setSelectedJob(false)} />
         </div>
     )
 }
