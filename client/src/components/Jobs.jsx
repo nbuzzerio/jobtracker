@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import ApplicationForm from './ApplicatoinForm.jsx';
+import JobsList from './JobsList.jsx';
 
 const styles = {
     display: 'grid',
@@ -26,45 +27,52 @@ const styleSq1 = {
     borderSizing: 'border-box',
     width: '5px',
     height: '5px',
-    backgroundColor: 'rgba(139, 0, 0, .8)'
+    backgroundColor: 'rgba(139, 0, 0, .8)',
+    cursor: 'pointer'
 }
 const styleSq2 = {
     border: 'solid 1px black',
     borderSizing: 'border-box',
     width: '5px',
     height: '5px',
-    backgroundColor: 'rgba(255, 165, 0, .8)'
+    backgroundColor: 'rgba(255, 165, 0, .8)',
+    cursor: 'pointer'
 }
 const styleSq3 = {
     border: 'solid 1px black',
     borderSizing: 'border-box',
     width: '5px',
     height: '5px',
-    backgroundColor: 'rgba(255, 255, 0, .8)'
+    backgroundColor: 'rgba(255, 255, 0, .8)',
+    cursor: 'pointer'
 }
 const styleSq4 = {
     border: 'solid 1px black',
     borderSizing: 'border-box',
     width: '5px',
     height: '5px',
-    backgroundColor: 'rgba(0, 128, 0, .8)'
+    backgroundColor: 'rgba(0, 128, 0, .8)',
+    cursor: 'pointer'
 }
 const styleSq5 = {
     border: 'solid 1px black',
     borderSizing: 'border-box',
     width: '5px',
     height: '5px',
-    backgroundColor: 'rgba(0, 255, 0, .8)'
+    backgroundColor: 'rgba(0, 255, 0, .8)',
+    cursor: 'pointer'
 }
 
 export default function Jobs(props) {
 
+    const [selectedJobs, setSelectedJobs] = useState([]);
+
     let dates;
     if (props.userData) { dates = props.userData.dates }
 
-
+    const thisYear = new Date().getFullYear()
     const currentDate = (day) => {
-        const first = new Date('1/1/2021').valueOf();
+        const first = new Date(`1/1/${thisYear}`).valueOf();
         const singleDay = 86400000;
         const dif = singleDay * day;
         const current = first + dif;
@@ -79,9 +87,8 @@ export default function Jobs(props) {
         return date
     }
 
-    const daysOfYear = new Array(364);
+    const daysOfYear = new Array(365);
     daysOfYear.fill('');
-
     let days;
     if (dates) {
         days = daysOfYear.map( (day, index) => {
@@ -91,7 +98,9 @@ export default function Jobs(props) {
                 applications = dates[date].length;
             }
             let style = styleSq0;
-            if (applications === 1) {
+            if (applications === 0) {
+                return <div className='dateSqaure' key={index} style={style}></div>
+            } else if (applications === 1) {
                 style = styleSq1;
             } else if (applications === 2) {
                 style = styleSq2;
@@ -102,10 +111,20 @@ export default function Jobs(props) {
             } else if (applications >= 5) {
                 style = styleSq5;
             }
-            return <div className='dateSqaure' key={index} style={style}></div>
+            return <div className='dateSqaure' key={index} style={style} onClick={() => {listApplications(dates[date])}}></div>
         });
+        const firstDayOfYear = new Date(`1/1/${thisYear}`).getDay();
+        if (firstDayOfYear > 0) {
+            days.unshift(
+                <div className='dateSqaure' key={-1} style={{gridRow: `${1}/${firstDayOfYear + 1}`, gridColumn: '1 / 1', visibility: 'hidden'}}></div>
+            )
+        }
     } else {
         days = <div>No Job Data Available</div>
+    }
+
+    const listApplications = (applications) => {
+        setSelectedJobs(applications);
     }
 
     return (
@@ -114,6 +133,7 @@ export default function Jobs(props) {
             <div id="year" style={styles}>
                 {days}
             </div>
+            <JobsList selectedJobs={selectedJobs} />
         </div>
 
     )

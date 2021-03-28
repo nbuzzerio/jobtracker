@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import postApplication from './_postApplication';
 
-export default function Login(props) {
+export default function ApplicationForm(props) {
     const token = localStorage.getItem("token");
 
     const [company, setCompany] = useState('');
